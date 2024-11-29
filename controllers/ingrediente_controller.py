@@ -15,40 +15,52 @@ def index():
     
     ingredientes = Ingrediente.query.all()
     if request.method == "GET":
-        return render_template("ingredientes.html", ingredientes = ingredientes)
+        if current_user.is_admin == True or current_user.is_employee == True:
+            return render_template("ingredientes.html", ingredientes = ingredientes)
+        else:
+            return render_template("noautorizado.html")
     else:
         if int(request.form["opcion"]) == 1:
 
-            ingrediente_consultar = Ingrediente()
-            resultado: str = ingrediente_consultar.es_sano(int(request.form["id_ingrediente"]))
-            flash(resultado)
+            if current_user.is_admin == True or  current_user.is_employee == True:
+                ingrediente_consultar = Ingrediente()
+                resultado: str = ingrediente_consultar.es_sano(int(request.form["id_ingrediente"]))
+                flash(resultado)
     
             # return render_template("ingredientes.html", ingredientes = ingredientes)
-
+            else:
+                return render_template("noautorizado.html")
         #Bajar complemento a 0
         elif int(request.form["opcion"]) == 3:
             
-            ingrediente_consultar = Ingrediente()
+            if current_user.is_admin == True or  current_user.is_employee == True:
 
-            resultado: str = ingrediente_consultar\
-                .bajar_complemento(int(request.form["id_ingrediente"]))
-            
-            db.session.commit()
-            flash(resultado)
+                ingrediente_consultar = Ingrediente()
+
+                resultado: str = ingrediente_consultar\
+                    .bajar_complemento(int(request.form["id_ingrediente"]))
+                
+                db.session.commit()
+                flash(resultado)
+            else:
+                return render_template("noautorizado.html")
 
             # return render_template("ingredientes.html", ingredientes = ingredientes)
         
         #Reabastecer
         elif int(request.form["opcion"]) == 2:
 
-            ingrediente_consultar = Ingrediente()
+            if current_user.is_admin == True or  current_user.is_employee == True:
+            
+                ingrediente_consultar = Ingrediente()
+                resultado: str = ingrediente_consultar\
+                    .reabastecer(int(request.form["id_ingrediente"]))
+                
+                flash(resultado)
+                db.session.commit()     
 
-            resultado: str = ingrediente_consultar\
-                .reabastecer(int(request.form["id_ingrediente"]))
-            
-            flash(resultado)
-            db.session.commit()                
-            
+            else:
+                return render_template("noautorizado.html")
         #     return render_template("ingredientes.html",ingredientes = ingredientes)
         
         # else: 

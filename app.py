@@ -85,13 +85,15 @@ def index():
     db.session.commit()
     
     #usuarios
-    usuario1 = Usuarios(username = "user1" , password = "123", is_admin = True,  es_empleado = False)
-    usuario2 = Usuarios(username = "user2" , password = "456", is_admin = False, es_empleado = True)
-    usuario3 = Usuarios(username = "user3" , password = "789", is_admin = False, es_empleado = True)
+    usuario1 = Usuarios(username = "user1" , password = "123", is_admin = True,  is_employee = False)
+    usuario2 = Usuarios(username = "user2" , password = "456", is_admin = False, is_employee = True)
+    usuario3 = Usuarios(username = "user3" , password = "789", is_admin = False, is_employee = True)
+    cliente1 = Usuarios(username = "cliente1" , password = "123", is_admin = False, is_employee = False)
 
     db.session.add(usuario1)
     db.session.add(usuario2)
     db.session.add(usuario3)
+    db.session.add(cliente1)
     db.session.commit()
     logout_user()
 
@@ -115,6 +117,7 @@ def login():
                 # perros = Perro.query.all()
                 # cuidadores = Cuidador.query.all()
             flash(f"Bienvenido {current_user.username}")
+            
             return render_template("inicio.html")
 
         else: 
