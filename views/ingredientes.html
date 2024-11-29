@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingredientes</title>
+
+</head>
+<body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul>
+            {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    <a href="http://127.0.0.1:5000/"><button><h2>Inicio</h2></button></a>
+    <a href="http://127.0.0.1:5000/producto/"><button><h2>Producto</h2></button></a>
+    <h1>Ingredientes</h1>
+    <table border="4" style="text-align: center;">
+    <tr></tr>
+        <td style="width: 3%;">id  </td>
+        <td style="width: 8%;">nombre  </td>
+        <td style="width: 5%;">contador  </td>
+        <td style="width: 5%;">calorias </td>
+        <td style="width: 5%;">precio </td>
+        <td style="width: 5%;">vegetariano </td>
+        <td style="width: 10%;">sabor </td>
+        <td style="width: 10%;">es complemento? </td>
+    <tr></tr>
+    {% for ingrediente in ingredientes %}
+    <p>
+        <td>{{ingrediente.id}}</td>
+        <td>{{ingrediente.nombre}}</td>
+        <td>{{ingrediente.contador}}</td>
+        <td>{{ingrediente.calorias}}</td>
+        <td>{{ingrediente.precio}}</td>
+        <td>{{ingrediente.vegetariano}}</td> 
+        <td>{{ingrediente.sabor}}</td>
+        <td>{{ingrediente.is_complemento}}</td>
+    <tr></tr>
+    </p>
+    {%endfor%}
+    </table>
+    <tr></tr>
+    <h1>Ingrediente Sano?</h1>
+    <table border="4" style="text-align: center;">
+        <tr></tr>
+        <td style="width: 10%;">ID Ingrediente</td>
+        <td style="width: 10%;"></td>
+        <tr></tr>
+        <form action="/ingredientes/" method="post">
+            <input type="hidden" name="opcion" value="1">
+            <td style="width: 10%;"><input type="id" name="id_ingrediente"></td>
+            <td style="width: 10%;"><button type="submit">Consultar</button></td>
+        </form>
+        <tr></tr>
+
+    </table>
+
+    <h1>Reabastecer</h1>
+    <table border="4" style="text-align: center;">
+        <tr></tr>
+        <td style="width: 10%;">ID Ingrediente</td>
+        <td style="width: 10%;"></td>
+        <tr></tr>
+        <form action="/ingredientes/" method="post">
+            <input type="hidden" name="opcion" value="2">
+            <td style="width: 10%;"><input type="id" name="id_ingrediente"></td>
+            <td style="width: 10%;"><button type="submit">Reabastecer</button></td>
+        </form>
+        <tr></tr>
+
+    </table>
+
+    <h1>bajar a 0 complemento</h1>
+    <table border="4" style="text-align: center;">
+        <tr></tr>
+        <td style="width: 10%;">ID Ingrediente</td>
+        <td style="width: 10%;"></td>
+        <tr></tr>
+        <form action="/ingredientes/" method="post">
+            <input type="hidden" name="opcion" value="3">
+            <td style="width: 10%;"><input type="id" name="id_ingrediente"></td>
+            <td style="width: 10%;"><button type="submit">Bajar</button></td>
+        </form>
+        <tr></tr>
+
+    </table>
+
+</body>
+</html>

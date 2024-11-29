@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul>
+            {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+        <a href="http://127.0.0.1:5000/"><button><h2>Inicio</h2></button></a>
+        <a href="http://127.0.0.1:5000/ingredientes/"><button><h2>Ingredientes</h2></button></a>
+    <table border="6" style="text-align: center;" title="10General">
+        <h1> </h1>
+        <form action="/producto/" method="post">
+            <input type="hidden" name="opcion" value="2">
+            <td style="width: 10%;"><button type="submit" >ACTUALIZAR</button></td>
+        </form>
+        <td style="width: auto;">Producto más rentable</td>
+        <td style="width: auto;">Venta del dia</td>
+        <tr></tr>
+        <td> </td>
+        <td>{{producto_rentable}}</td>
+        <td>{{venta_dia}}</td>
+    </table>
+    <h1>Productos</h1>
+    <table border="4" style="text-align: center;">
+    <tr></tr>
+        <td style="width: 3%;">id  </td>
+        <td style="width: 8%;">nombre  </td>
+        <td style="width: 5%;">precio  </td>
+        <td style="width: 5%;">volumen_oz </td>
+        <td style="width: 5%;">tipo_vaso </td>
+        <td style="width: 5%; text-decoration: double;">is_copa </td>
+    <tr></tr>
+        {% for producto in productos%}
+        <p>
+            <td>{{producto.id_producto}}</td>
+            <td>{{producto.nombre}}</td>
+            <td>{{producto.precio}}</td>
+            <td>{{producto.volumen_oz}}</td>
+            <td>{{producto.tipo_vaso}}</td>
+            <td>{{producto.is_copa}}</td>
+            <tr></tr>
+        </p>
+        {%endfor%}
+    </table>
+
+    <h1>Vender</h1>
+    <table border="4" style="text-align: center;">
+        <tr></tr>
+        <td style="width: 10%;">ID Producto a vender</td>
+        <td style="width: 10%;"></td>
+        <tr></tr>
+        <form action="/producto/" method="post">
+            <input type="hidden" name="opcion" value="1">
+            <td style="width: 10%;"><input type="id" name="id_producto"></td>
+            <td style="width: 10%;"><button type="submit" >Vender</button></td>
+        </form>
+        <tr></tr>
+
+    </table>
+
+    
+</body>
+</html>
