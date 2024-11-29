@@ -7,6 +7,7 @@ class Usuarios(db.Model, UserMixin):
     username = db.Column(db.String(60), nullable = False)
     password = db.Column(db.String(20), nullable = False)
     is_admin = db.Column(db.Boolean, nullable = True)
+    es_empleado = db.Column(db.Boolean, nullable = True)
 
     def buscar_usuario(self, id_usuario):
         usuario = Usuarios.query.filter_by(id = id_usuario).first()

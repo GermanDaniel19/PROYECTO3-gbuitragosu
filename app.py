@@ -85,9 +85,9 @@ def index():
     db.session.commit()
     
     #usuarios
-    usuario1 = Usuarios(username = "user1" , password = "123", is_admin = True)
-    usuario2 = Usuarios(username = "user2" , password = "456", is_admin = False)
-    usuario3 = Usuarios(username = "user3" , password = "789", is_admin = False)
+    usuario1 = Usuarios(username = "user1" , password = "123", is_admin = True,  es_empleado = False)
+    usuario2 = Usuarios(username = "user2" , password = "456", is_admin = False, es_empleado = True)
+    usuario3 = Usuarios(username = "user3" , password = "789", is_admin = False, es_empleado = True)
 
     db.session.add(usuario1)
     db.session.add(usuario2)
